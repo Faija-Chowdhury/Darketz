@@ -64,9 +64,11 @@
                   @endif
                 </div>
 
-     
-            <small class="text-green">Available Product: <b>{{$product->stock}}</b> </small>
-    
+            @if($stock)
+            <small class="text-green">Available Product: <b>{{$stock}}</b> </small>
+            @else
+            <small class="text-green"><b>Out Of Stock </b> </small>
+            @endif
                 
                 <div class="my-3">
                   <h4>Product Code:</h4>
@@ -90,7 +92,11 @@
                   <input type="hidden" name="product_id" value="{{$product->id}}">
                   <input type="hidden" id="stockVal" value="{{$product->stock}}">
                   <input type="hidden" id="quantity" name="quantity" value="">
+                  @if($stock)
                   <button id="addToCartBtn"  type="submit" class="btn btn-orange">Add to Cart</button>
+                  @else
+                 <!-- <button id="addToCartBtn"  type="submit" class="btn btn-orange">Add to Cart</button> -->
+                  @endif
                 </form>
                 @else
                   <button id="addToCartBtn" class="btn btn-secondary">Out of stock</button>

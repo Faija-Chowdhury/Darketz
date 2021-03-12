@@ -19,6 +19,21 @@
 </section>
 @endguest
 
+@auth
+<section class="top-banner bg-light my-0 py-2">
+  <div class="container-fluid">
+      <ul class="top-banner-list small">
+        <li>
+          <a href="call:4222022">Call us:+4222022</a>
+        </li>
+        <li class="active">
+          <a href="{{route('myOrder.index')}}">Track my order</a>
+        </li>
+      </ul>
+  </div>
+</section>
+@endauth
+
 <header class="section-header sticky-top my-0 py-0">
   <section class="header-main border-bottom">
       <div class="container">

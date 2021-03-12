@@ -49,7 +49,8 @@ class NewUserController extends Controller
   
         ]);
 
-        $data = $request->all();       
+        $data = $request->all();   
+        $data['password'] = Hash::make($request->password);    
         if ($request->has('logo')) {
         $data['logo'] = $request->logo->store('/avater');
         }

@@ -70,18 +70,22 @@ class ShopController extends Controller
         $questions = $product->getQuestions()->with('user')->paginate(6);
         $mightAlsoLike = Product::where('id', '!=', $product->id)->inRandomOrder()->with('productImage')->take(6)->get();
 
+            $orderedProducts = Order::where('product_id', $id)->get();
+            $orderedProductCount = 0;
+            foreach ($orderedProducts as $orderedProduct) {
+                $orderedProductCount += $orderedProduct->quantity;
+            }
+            $productCount = Product::find((int)$id);
+            $stock = $productCount->stock - $orderedProductCount;
 
-            /*$productsStock = DB::table('products')->pluck('stock')->first();
-            $orderQuantity = DB::table('orders')->pluck('quantity')->first();
-            $productDetails = $productsStock-$orderQuantity;*/
 
         return view('shop.show')->with([
             'product' => $product,
             'questions' => $questions,
             'mightAlsoLike' => $mightAlsoLike,
-            //'productDetails' => $productDetails
-
+            'stock' => $stock
         ]);
+
     }
 
     public function catalog(Request $request)
